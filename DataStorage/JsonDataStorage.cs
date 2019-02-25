@@ -12,7 +12,7 @@ namespace DashBot.DataStorage
     {
         public const string JsonDataDirectory = "JsonData/";
 
-        public static string GetStoragePathFor(Type objType, string path) 
+        public static string GetStoragePathForFile(Type objType, string path) 
             => Path.Combine(JsonDataDirectory, objType.Name, path + ".json");
 
         public static string GetPathForCollection(Type objType, string collectionPath)
@@ -20,7 +20,7 @@ namespace DashBot.DataStorage
 
         public T Restore<T>(string path)
         {
-            var fullPath = GetStoragePathFor(typeof(T), path);
+            var fullPath = GetStoragePathForFile(typeof(T), path);
             return RestoreFromFile<T>(fullPath);
         }
 
@@ -35,7 +35,7 @@ namespace DashBot.DataStorage
         public void Store<T>(T obj, string path)
         {
             Assert.NotEnumerable(typeof(T));
-            var fullPath = GetStoragePathFor(typeof(T), path);
+            var fullPath = GetStoragePathForFile(typeof(T), path);
             var json = JsonConvert.SerializeObject(obj);
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
             File.WriteAllText(fullPath, json);

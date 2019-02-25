@@ -49,7 +49,7 @@ namespace DataStorage.Tests
             const string path = "ToStore/stored";
             storage.Store(SimpleClassValue, path);
 
-            var expectedFile = JsonDataStorage.GetStoragePathFor(
+            var expectedFile = JsonDataStorage.GetStoragePathForFile(
                 typeof(SimpleClass),
                 path
             );
@@ -65,7 +65,7 @@ namespace DataStorage.Tests
             const string path = "Store/SubStore/item";
             storage.Store(SimpleClassValue, path);
 
-            var expectedFile = JsonDataStorage.GetStoragePathFor(
+            var expectedFile = JsonDataStorage.GetStoragePathForFile(
                 typeof(SimpleClass),
                 path
             );
@@ -91,7 +91,7 @@ namespace DataStorage.Tests
 
         private void SetupDummyFile(Type type, string path, string content)
         {
-            var fullPath = JsonDataStorage.GetStoragePathFor(type, path);
+            var fullPath = JsonDataStorage.GetStoragePathForFile(type, path);
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
             File.WriteAllText(fullPath, content);
         }
