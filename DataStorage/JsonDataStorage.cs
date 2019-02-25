@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DashBot.Abstractions;
 using DashBot.Assertions;
 using Newtonsoft.Json;
@@ -14,6 +15,9 @@ namespace DashBot.DataStorage
         public static string GetStoragePathFor(Type objType, string path) 
             => Path.Combine(JsonDataDirectory, objType.Name, path + ".json");
 
+        public static string GetPathForCollection(Type objType, string collectionPath)
+            => Path.Combine(JsonDataDirectory, objType.Name, collectionPath);
+
         public T Restore<T>(string path)
         {
             var fullPath = GetStoragePathFor(typeof(T), path);
@@ -22,7 +26,10 @@ namespace DashBot.DataStorage
 
         public IEnumerable<T> RestoreCollection<T>(string path)
         {
-            throw new NotImplementedException();
+            var collectionPath = GetPathForCollection(typeof(T), path);
+            Assert.DirectoryExists(collectionPath);
+            var files = Directory.GetFiles(collectionPath, "*.json");
+            return files.Select(f => RestoreFromFile<T>(f));
         }
 
         public void Store<T>(T obj, string path)
@@ -40,5 +47,7 @@ namespace DashBot.DataStorage
             var json = File.ReadAllText(filePath);
             return JsonConvert.DeserializeObject<T>(json);
         }
+
     }
 }
+

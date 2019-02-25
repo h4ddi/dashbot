@@ -19,7 +19,16 @@ namespace DashBot.Assertions
             if(IsEnumerableType(type))
             {
                 throw new InvalidOperationException(
-                    "JsonDataStorage does not support storing collections.");
+                    "The provided type cannot be a collection.");
+            }
+        }
+
+        public static void DirectoryExists(string path)
+        {
+            if(!Directory.Exists(path))
+            {
+                throw new InvalidOperationException(
+                    $"Could not find the following directory: {path}");
             }
         }
 
@@ -27,3 +36,4 @@ namespace DashBot.Assertions
             => (type.GetInterface(nameof(IEnumerable)) != null);
     }
 }
+

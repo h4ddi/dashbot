@@ -20,7 +20,7 @@ namespace DataStorage.Tests
         private const string SimpleClassJson = "{\"MyNumber\":3}";
         private const string SecondClassJson = "{\"MyNumber\":99}";
         private const string SimpleClassPath = "MyClasses/testclass";
-        private const string SecondClassPath = "MyClasses/testclass";
+        private const string SecondClassPath = "MyClasses/secondclass";
         private const string SimpleClassCollectionPath = "MyClasses";
         private const int SimpleClassCollectionCount = 2;
 
@@ -85,8 +85,8 @@ namespace DataStorage.Tests
             var actual = storage.RestoreCollection<SimpleClass>(SimpleClassCollectionPath);
             Assert.NotNull(actual);
             Assert.Equal(SimpleClassCollectionCount, actual.Count());
-            Assert.Equal(SimpleClassValue.MyNumber, actual.First().MyNumber);
-            Assert.Equal(SecondClassValue.MyNumber, actual.ElementAt(1).MyNumber);
+            Assert.Contains(actual, x => x.MyNumber == SimpleClassValue.MyNumber);
+            Assert.Contains(actual, x => x.MyNumber == SecondClassValue.MyNumber);
         }
 
         private void SetupDummyFile(Type type, string path, string content)
