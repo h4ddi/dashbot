@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Abstractions
+namespace JsonStorage
 {
     public class Class1
     {
