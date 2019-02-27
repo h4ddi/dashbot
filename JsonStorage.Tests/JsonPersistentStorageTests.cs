@@ -10,7 +10,7 @@ namespace JsonStorage.Tests
     {
         private readonly TestDataHelper _testDataHelper;
         private readonly IPersistentStorage _storage;
-        private const string Collection = "Text/Collection";
+        private const string Collection = "Test/Collection";
 
         public JsonPersistentStorageTests()
         {
