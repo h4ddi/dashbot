@@ -34,7 +34,7 @@ namespace DashBot.DataStorage
         }
 
         public T RestoreSingle<T>(string collection, string pattern)
-            => RestoreMany<T>(collection, pattern).First();
+            => RestoreMany<T>(collection, pattern).FirstOrDefault();
 
         private T RestoreFromFile<T>(string filePath)
         {
