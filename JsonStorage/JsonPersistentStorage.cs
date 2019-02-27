@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using DashBot.Abstractions;
 
@@ -52,7 +51,7 @@ namespace DashBot.DataStorage
         //{
         //throw new NotImplementedException();
         //}
-        public T RestoreSingle<T>(string collection, string pattern)
+        public void Store<T>(T obj, string collection, string key)
         {
             throw new NotImplementedException();
         }
@@ -62,9 +61,7 @@ namespace DashBot.DataStorage
             throw new NotImplementedException();
         }
 
-        public void Store<T>(T obj, string collection, string key)
-        {
-            throw new NotImplementedException();
-        }
+        public T RestoreSingle<T>(string collection, string pattern)
+            => RestoreCollection<T>(collection, pattern).First();
     }
 }
