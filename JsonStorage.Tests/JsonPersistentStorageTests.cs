@@ -45,6 +45,17 @@ namespace JsonStorage.Tests
             AssertDummyCollectionsMatch(expected, actual);
         }
 
+        [Fact]
+        public void ShouldRestoreSome()
+        {
+            const string pattern = "DataKey-*";
+            var expected = _testDataHelper.GetDummyByKeyContains(pattern.Replace("*", ""));
+
+            var actual = _storage.RestoreMany<DummyDataHolder>(Collection, pattern);
+
+            AssertDummyCollectionsMatch(expected, actual);
+        }
+
         private void AssertDummyCollectionsMatch(IEnumerable<DummyDataHolder> expected, IEnumerable<DummyDataHolder> actual)
         {
             Assert.Equal(expected.Count(), actual.Count());

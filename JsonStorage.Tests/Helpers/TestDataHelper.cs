@@ -24,14 +24,17 @@ namespace JsonStorage.Tests.Helpers
         /// the "expected" value of a test.
         ///</summary>
         public DummyDataHolder GetDummyByKey(string key)
-        {
-            return testKeyDataPairs
+            => testKeyDataPairs
                 .First(p => p.Key == key)
                 .Value;
-        }
 
         public IEnumerable<DummyDataHolder> GetAllDummyFiles()
             => testKeyDataPairs.Values.ToArray();
+
+        public IEnumerable<DummyDataHolder> GetDummyByKeyContains(string pattern)
+            => testKeyDataPairs
+                .Where(p => p.Key.Contains(pattern))
+                .Select(p => p.Value);
 
         private void CreateTestKeyDataPairs()
         {
