@@ -5,7 +5,7 @@ namespace DashBot.Abstractions
     public interface IPersistentStorage
     {
         void Store<T>(T obj, string collection, string key);
-        T Restore<T>(string collection, string pattern);
+        T RestoreSingle<T>(string collection, string pattern);
         IEnumerable<T> RestoreCollection<T>(string collection, string pattern);
     }
 }

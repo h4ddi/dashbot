@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.IO;
 
 namespace JsonStorage.Tests.Helpers
@@ -16,6 +17,17 @@ namespace JsonStorage.Tests.Helpers
 
         public void DeleteTestData()
             => Directory.Delete("JsonData", true);
+
+        ///<summary>
+        /// Returns a stored test object by key for
+        /// the "expected" value of a test.
+        ///</summary>
+        public DummyDataHolder GetDummyByKey(string key)
+        {
+            return testKeyDataPairs
+                .First(p => p.Key == key)
+                .Value;
+        }
 
         private void CreateTestKeyDataPairs()
         {

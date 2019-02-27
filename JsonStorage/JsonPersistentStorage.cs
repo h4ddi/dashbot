@@ -6,7 +6,7 @@ using DashBot.Abstractions;
 
 namespace DashBot.DataStorage
 {
-    public class JsonDataStorage : IPersistentStorage
+    public class JsonPersistentStorage : IPersistentStorage
     {
         //public const string JsonDataDirectory = "JsonData/";
 
@@ -52,7 +52,7 @@ namespace DashBot.DataStorage
         //{
         //throw new NotImplementedException();
         //}
-        public T Restore<T>(string collection, string pattern)
+        public T RestoreSingle<T>(string collection, string pattern)
         {
             throw new NotImplementedException();
         }

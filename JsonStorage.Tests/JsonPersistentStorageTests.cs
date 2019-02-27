@@ -1,20 +1,37 @@
 using Xunit;
 using JsonStorage.Tests.Helpers;
 using System;
+using DashBot.Abstractions;
+using DashBot.DataStorage;
 
 namespace JsonStorage.Tests
 {
     public class JsonPersistentStorageTests : IDisposable
     {
         private readonly TestDataHelper _testDataHelper;
+        private readonly IPersistentStorage _storage;
+        private const string Collection = "Text/Collection";
 
         public JsonPersistentStorageTests()
         {
             _testDataHelper = new TestDataHelper();
+            _storage = new JsonPersistentStorage();
         }
 
         public void Dispose()
             => _testDataHelper.DeleteTestData();
+
+        [Fact]
+        public void ShouldRestoreByExactPattern()
+        {
+            const string pattern = "DataKey-A";
+            var expected = _testDataHelper.GetDummyByKey(pattern);
+
+            var actual = _storage.RestoreSingle<DummyDataHolder>(Collection, pattern);
+
+            Assert.Equal(expected.Text, actual.Text);
+            Assert.Equal(expected.Number, actual.Number);
+        }
 
         // OLD TESTS
 //        public class SimpleClass
