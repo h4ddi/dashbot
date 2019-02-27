@@ -56,6 +56,24 @@ namespace JsonStorage.Tests
             AssertDummyCollectionsMatch(expected, actual);
         }
 
+        [Fact]
+        public void ShouldStoreAndRestore()
+        {
+            const string collection = "My/Collection/ABC";
+            const string key = "ToStoreKey";
+            var expected = new DummyDataHolder
+            {
+                Text = "Hello, World!",
+                Number = 420
+            };
+
+            _storage.Store(expected, collection, key);
+            var actual = _storage.RestoreSingle<DummyDataHolder>(collection, key);
+
+            Assert.Equal(expected.Text, actual.Text);
+            Assert.Equal(expected.Number, actual.Number);
+        }
+
         private void AssertDummyCollectionsMatch(IEnumerable<DummyDataHolder> expected, IEnumerable<DummyDataHolder> actual)
         {
             Assert.Equal(expected.Count(), actual.Count());

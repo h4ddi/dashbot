@@ -56,7 +56,12 @@ namespace DashBot.DataStorage
         //}
         public void Store<T>(T obj, string collection, string key)
         {
-            throw new NotImplementedException();
+            var path = ToStoragePath(typeof(T), collection);
+            var filePath = Path.Combine(path, $"{key}.json");
+            var json = JsonConvert.SerializeObject(obj);
+
+            Directory.CreateDirectory(path);
+            File.WriteAllText(filePath, json);
         }
 
         public IEnumerable<T> RestoreMany<T>(string collection, string pattern = "*")
