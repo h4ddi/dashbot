@@ -59,7 +59,7 @@ namespace DashBot.DataStorage
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> RestoreCollection<T>(string collection, string pattern = "*")
+        public IEnumerable<T> RestoreMany<T>(string collection, string pattern = "*")
         {
             var path = ToStoragePath(typeof(T), collection);
             Assert.DirectoryExists(path);
@@ -68,7 +68,7 @@ namespace DashBot.DataStorage
         }
 
         public T RestoreSingle<T>(string collection, string pattern)
-            => RestoreCollection<T>(collection, pattern).First();
+            => RestoreMany<T>(collection, pattern).First();
 
         private T RestoreFromFile<T>(string filePath)
         {

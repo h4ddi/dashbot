@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using System;
 
 namespace JsonStorage.Tests.Helpers
 {
@@ -28,6 +29,9 @@ namespace JsonStorage.Tests.Helpers
                 .First(p => p.Key == key)
                 .Value;
         }
+
+        public IEnumerable<DummyDataHolder> GetAllDummyFiles()
+            => testKeyDataPairs.Values.ToArray();
 
         private void CreateTestKeyDataPairs()
         {

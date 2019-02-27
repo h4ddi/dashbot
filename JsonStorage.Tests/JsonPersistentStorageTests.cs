@@ -1,6 +1,8 @@
 using Xunit;
 using JsonStorage.Tests.Helpers;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using DashBot.Abstractions;
 using DashBot.DataStorage;
 
@@ -32,6 +34,29 @@ namespace JsonStorage.Tests
             Assert.Equal(expected.Text, actual.Text);
             Assert.Equal(expected.Number, actual.Number);
         }
+
+        [Fact]
+        public void ShouldRestoreEverything()
+        {
+            var expected = _testDataHelper.GetAllDummyFiles();
+
+            var actual = _storage.RestoreMany<DummyDataHolder>(Collection);
+
+            AssertDummyCollectionsMatch(expected, actual);
+        }
+
+        private void AssertDummyCollectionsMatch(IEnumerable<DummyDataHolder> expected, IEnumerable<DummyDataHolder> actual)
+        {
+            Assert.Equal(expected.Count(), actual.Count());
+            foreach(var expectedItem in expected)
+            {
+                Assert.Contains(actual, actualItem 
+                        => DummyDataHoldersAreEqual(actualItem, expectedItem));
+            }
+        }
+
+        private bool DummyDataHoldersAreEqual(DummyDataHolder a, DummyDataHolder b)
+            => a.Text == b.Text && a.Number == b.Number;
 
         // OLD TESTS
 //        public class SimpleClass
