@@ -1,4 +1,4 @@
-namespace DashBot.Bot.Credentials
+namespace DashBot.Entities
 {
     public class BotAccount
     {
