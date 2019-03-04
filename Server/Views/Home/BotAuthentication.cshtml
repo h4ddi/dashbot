@@ -1,1 +1,10 @@
-<h1>Hello, World!</h1>
+@model BotAuthViewModel
+
+@if(!Model.SavedBotAccounts.Any())
+{
+    <p>There are no stored accounts.</p>
+}
+else
+{
+    <p>There are stored accounts...</p>
+}

@@ -1,4 +1,12 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+﻿@font-face {
+    font-family: 'pxplus_ibm_vga8regular';
+    src: url('../fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
+         url('../fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
@@ -18,11 +26,15 @@ html {
   }
 }
 
+* {
+  font-family: 'pxplus_ibm_vga8regular';
+}
+
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid #111;
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #111;
 }
 
 .box-shadow {

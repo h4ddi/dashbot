@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using DashBot.Abstractions;
+using DashBot.Entities;
 
 namespace Server.Controllers
 {
@@ -20,8 +21,22 @@ namespace Server.Controllers
 
         public IActionResult BotAuthentication()
         {
-            return View();
+            var storedAccounts = _botCredentials.GetAllAccounts();
+            var model = new BotAuthViewModel()
+            {
+               SavedBotAccounts = storedAccounts.Select(ToViewModel)
+            };
+
+            return View(model);
         }
+
+        private BotAccountViewModel ToViewModel(BotAccount entity)
+            => new BotAccountViewModel
+                {
+                    AvatarUrl = entity.AvatarUrl,
+                    Name = entity.Name,
+                    Token = entity.Token
+                };
 
         public IActionResult Index()
         {

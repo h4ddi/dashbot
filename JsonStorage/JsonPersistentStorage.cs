@@ -28,13 +28,16 @@ namespace DashBot.DataStorage
         public IEnumerable<T> RestoreMany<T>(string collection, string pattern = "*")
         {
             var path = ToStoragePath(typeof(T), collection);
-            Assert.DirectoryExists(path);
+            EnsureDirectoryExists(path);
             var files = Directory.GetFiles(path, $"{pattern}.json");
             return files.Select(f => RestoreFromFile<T>(f));
         }
 
         public T RestoreSingle<T>(string collection, string pattern)
             => RestoreMany<T>(collection, pattern).FirstOrDefault();
+
+        private void EnsureDirectoryExists(string path)
+            => Directory.CreateDirectory(path);
 
         private T RestoreFromFile<T>(string filePath)
         {
@@ -44,4 +47,3 @@ namespace DashBot.DataStorage
         }
     }
 }
-
