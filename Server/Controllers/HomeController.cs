@@ -5,11 +5,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
+using DashBot.Abstractions;
 
 namespace Server.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ICredentials _botCredentials;
+
+        public HomeController(ICredentials botCredentials)
+        {
+            _botCredentials = botCredentials;
+        }
+
+        public IActionResult BotAuthentication()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return View();
