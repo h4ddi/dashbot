@@ -1,0 +1,33 @@
+﻿@model Server.Models.OneTimeBot
+
+@{
+    ViewData["Title"] = "OneTimeToken";
+}
+
+<h1>OneTimeToken</h1>
+
+<h4>OneTimeBot</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="OneTimeToken" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Token" class="control-label">Bot Token</label>
+                <input asp-for="Token" class="form-control" />
+                <span asp-validation-for="Token" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Run" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="BotAuthentication">Choose a different bot authentication method</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

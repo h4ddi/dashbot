@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using DashBot.Abstractions;
 using DashBot.Credentials;
-using DashBot.DataStorage;
+using DashBot.JsonStorage;
 
 namespace DashBot.InversionOfControl
 {

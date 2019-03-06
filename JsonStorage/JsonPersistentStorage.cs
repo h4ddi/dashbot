@@ -6,7 +6,7 @@ using DashBot.Abstractions;
 using DashBot.Assertions;
 using Newtonsoft.Json;
 
-namespace DashBot.DataStorage
+namespace DashBot.JsonStorage
 {
     public class JsonPersistentStorage : IPersistentStorage
     {
@@ -30,7 +30,7 @@ namespace DashBot.DataStorage
             var path = ToStoragePath(typeof(T), collection);
             EnsureDirectoryExists(path);
             var files = Directory.GetFiles(path, $"{pattern}.json");
-            return files.Select(f => RestoreFromFile<T>(f));
+            return files.Select(RestoreFromFile<T>);
         }
 
         public T RestoreSingle<T>(string collection, string pattern)

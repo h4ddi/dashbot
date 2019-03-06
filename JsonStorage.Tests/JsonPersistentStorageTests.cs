@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using DashBot.Abstractions;
-using DashBot.DataStorage;
+using DashBot.JsonStorage;
 
 namespace JsonStorage.Tests
 {
