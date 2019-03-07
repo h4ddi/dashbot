@@ -17,10 +17,10 @@ namespace Server.Controllers
             _bot = bot;
         }
 
-        public IActionResult BotAuthentication()
+        public IActionResult Authentication()
         {
             var storedAccounts = _botCredentials.GetAllAccounts();
-            var model = new BotAuthViewModel()
+            var model = new BotAuthViewModel
             {
                 SavedBotAccounts = storedAccounts.Select(ToViewModel)
             };
@@ -67,7 +67,7 @@ namespace Server.Controllers
             }
 
             _bot.Connect();
-            return Ok();
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult StopBot()
@@ -78,7 +78,7 @@ namespace Server.Controllers
             }
 
             _bot.Stop();
-            return Ok();
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult UseStoredAccount(string name)
@@ -86,7 +86,7 @@ namespace Server.Controllers
             var account = _botCredentials.GetAccountByName(name);
             if (account is null) { return BadRequest($"No account with the name {name} exists."); }
             _bot.Account = account;
-            return Ok();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
