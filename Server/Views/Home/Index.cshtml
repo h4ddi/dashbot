@@ -6,3 +6,14 @@
 <h1>Hello, World!</h1>
 
 <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount" />
+
+@if (Model.BotIsRunning)
+{
+    <p>Bot is running...</p>
+    <a asp-controller="Bot" asp-action="StopBot">Stop</a>
+}
+else
+{
+    <p>Bot is not running.</p>
+    <a asp-controller="Bot" asp-action="StartBot">Start</a>
+}

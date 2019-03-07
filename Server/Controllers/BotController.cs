@@ -58,5 +58,35 @@ namespace Server.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult StartBot()
+        {
+            if (_bot.GetStatus() == BotStatus.Running)
+            {
+                return BadRequest("Bot is already running.");
+            }
+
+            _bot.Connect();
+            return Ok();
+        }
+
+        public IActionResult StopBot()
+        {
+            if (_bot.GetStatus() == BotStatus.NotRunning)
+            {
+                return BadRequest("Bot is not running.");
+            }
+
+            _bot.Stop();
+            return Ok();
+        }
+
+        public IActionResult UseStoredAccount(string name)
+        {
+            var account = _botCredentials.GetAccountByName(name);
+            if (account is null) { return BadRequest($"No account with the name {name} exists."); }
+            _bot.Account = account;
+            return Ok();
+        }
     }
 }

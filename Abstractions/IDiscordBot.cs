@@ -6,5 +6,7 @@ namespace DashBot.Abstractions
     {
         BotAccount Account { get; set; }
         BotStatus GetStatus();
+        void Connect();
+        void Stop();
     }
 }

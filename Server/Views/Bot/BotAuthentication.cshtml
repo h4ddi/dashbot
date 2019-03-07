@@ -1,12 +1,20 @@
 @model BotAuthViewModel
 
-@if(!Model.SavedBotAccounts.Any())
+@if (!Model.SavedBotAccounts.Any())
 {
     <p>There are no stored accounts.</p>
 }
 else
 {
-    <p>There are stored accounts...</p>
+    foreach (var account in Model.SavedBotAccounts)
+    {
+        <a asp-controller="Bot" asp-action="UseStoredAccount" asp-route-name="@account.Name">
+            <div>
+                <img src="@account.AvatarUrl" width="100" height="100" />
+                <p>@account.Name</p>
+            </div>
+        </a>
+    }
 }
 
 <ul>

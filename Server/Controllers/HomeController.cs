@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using DashBot.Abstractions;
+using DashBot.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
@@ -16,7 +17,10 @@ namespace Server.Controllers
 
         public IActionResult Index()
         {
-            var model = new OverviewViewModel();
+            var model = new OverviewViewModel
+            {
+                BotIsRunning = _bot.GetStatus() == BotStatus.Running
+            };
 
             if (_bot.Account != null)
             {

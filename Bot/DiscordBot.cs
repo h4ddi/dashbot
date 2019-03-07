@@ -28,5 +28,21 @@ namespace DashBot.Bot
 
             return BotStatus.Running;
         }
+
+        public async void Connect()
+        {
+            if (Account is null) { return; }
+
+            if (GetStatus() == BotStatus.Running)
+            {
+                await _client.StopAsync();
+            }
+
+            await _client.LoginAsync(TokenType.Bot, Account.Token);
+            await _client.StartAsync();
+        }
+
+        public async void Stop()
+            => await _client.StopAsync();
     }
 }
