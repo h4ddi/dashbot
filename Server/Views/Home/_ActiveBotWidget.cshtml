@@ -1,0 +1,14 @@
+﻿@model Server.Models.BotAccountViewModel
+
+@if (Model is null)
+{
+    <p>No bot account has been selected.</p>
+    <p>You can authenticate a bot <a asp-action="BotAuthentication" asp-controller="Bot">here</a>.</p>
+}
+else
+{
+    <h4>Bot Account</h4>
+    <hr />
+    <img src="@Model.AvatarUrl"/>
+    <p>@Model.Name</p>
+}

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using DashBot.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 
@@ -6,9 +7,27 @@ namespace Server.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IDiscordBot _bot;
+
+        public HomeController(IDiscordBot bot)
+        {
+            _bot = bot;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var model = new OverviewViewModel();
+
+            if (_bot.Account != null)
+            {
+                model.ActiveAccount = new BotAccountViewModel
+                {
+                    AvatarUrl = _bot.Account.AvatarUrl,
+                    Name = _bot.Account.Name
+                };
+            }
+
+            return View(model);
         }
 
         public IActionResult Privacy()

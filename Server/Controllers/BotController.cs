@@ -9,10 +9,12 @@ namespace Server.Controllers
     public class BotController : Controller
     {
         private readonly ICredentials _botCredentials;
+        private readonly IDiscordBot _bot;
 
-        public BotController(ICredentials botCredentials)
+        public BotController(ICredentials botCredentials, IDiscordBot bot)
         {
             _botCredentials = botCredentials;
+            _bot = bot;
         }
 
         public IActionResult BotAuthentication()
@@ -30,11 +32,9 @@ namespace Server.Controllers
             => new BotAccountViewModel
             {
                 AvatarUrl = entity.AvatarUrl,
-                Name = entity.Name,
-                Token = entity.Token
+                Name = entity.Name
             };
-
-
+        
         public IActionResult OneTimeToken()
         {
             return View();
@@ -43,7 +43,20 @@ namespace Server.Controllers
         [HttpPost]
         public IActionResult OneTimeToken([FromForm]OneTimeBot oneTimeBot)
         {
-            return Ok();
+            if (_bot.GetStatus() == BotStatus.Running)
+            {
+                ModelState.AddModelError("Token", "You cannot change the account while the bot is running.");
+                return View(oneTimeBot);
+            }
+
+            _bot.Account = new BotAccount
+            {
+                Name = Constants.AnonymousBotName,
+                AvatarUrl = Constants.AnonymousBotAvatarUrl,
+                Token = oneTimeBot.Token
+            };
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
