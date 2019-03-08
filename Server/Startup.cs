@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DashBot.InversionOfControl;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DashBot.InversionOfControl;
+using AutoMapper;
+using DashBot.Entities;
+using Server.Models;
 
 namespace Server
 {
@@ -18,6 +16,11 @@ namespace Server
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<BotAccount, BotAccountViewModel>();
+            });
         }
 
         public IConfiguration Configuration { get; }

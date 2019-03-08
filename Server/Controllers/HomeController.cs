@@ -19,7 +19,7 @@ namespace Server.Controllers
         {
             var model = new OverviewViewModel
             {
-                BotIsRunning = _bot.GetStatus() == BotStatus.Running
+                BotIsRunning = _bot.IsRunning()
             };
 
             if (_bot.Account != null)

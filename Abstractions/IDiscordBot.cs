@@ -5,7 +5,7 @@ namespace DashBot.Abstractions
     public interface IDiscordBot
     {
         BotAccount Account { get; set; }
-        BotStatus GetStatus();
+        bool IsRunning();
         void Connect();
         void Stop();
     }

@@ -18,25 +18,14 @@ namespace DashBot.Bot
             });
         }
         
-        public BotStatus GetStatus()
-        {
-            if (_client.ConnectionState == ConnectionState.Disconnected ||
-                _client.ConnectionState == ConnectionState.Disconnected)
-            {
-                return BotStatus.NotRunning;
-            }
-
-            return BotStatus.Running;
-        }
+        public bool IsRunning() =>
+            _client.ConnectionState == ConnectionState.Connected ||
+            _client.ConnectionState == ConnectionState.Connecting;
 
         public async void Connect()
         {
             if (Account is null) { return; }
-
-            if (GetStatus() == BotStatus.Running)
-            {
-                await _client.StopAsync();
-            }
+            if (IsRunning()) { await _client.StopAsync(); }
 
             await _client.LoginAsync(TokenType.Bot, Account.Token);
             await _client.StartAsync();
