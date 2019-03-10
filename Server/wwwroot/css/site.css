@@ -1,10 +1,11 @@
-﻿@font-face {
+/*@font-face {
     font-family: 'pxplus_ibm_vga8regular';
     src: url('../fonts/pxplus_ibm_vga8-webfont.woff2') format('woff2'),
          url('../fonts/pxplus_ibm_vga8-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-}
+}*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
@@ -27,7 +28,7 @@ html {
 }
 
 * {
-  font-family: 'pxplus_ibm_vga8regular';
+  font-family: 'Roboto', sans-serif;
 }
 
 .border-top {
@@ -56,6 +57,8 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-color: #333;
+  color: #eee;
 }
 .footer {
   position: absolute;
@@ -65,4 +68,28 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+
+/* Bot status
+-------------------------------------------------- */
+.status {
+  background-color: #222;
+  padding: 15px;
+  box-shadow: 1px 1px 3px 0 black;
+}
+
+.status-positive {
+  color: rgb(79, 228, 79);
+}
+
+.status-negative {
+  color: rgb(251, 76, 76);
+}
+
+.status-icon {
+  margin: 4px 10px 0 0;
+}
+
+.status-action {
+  float: right;
 }

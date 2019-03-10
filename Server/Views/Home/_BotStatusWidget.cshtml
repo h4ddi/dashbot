@@ -1,0 +1,35 @@
+﻿<!-- Model: BotIsRunning -->
+@model bool
+
+@if (Model)
+{
+    <div class="status status-positive">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-9">
+                    <i class="fas fa-play status-icon"></i>
+                    <span>Bot is running...</span>
+                </div>
+                <div class="col-3">
+                    <a asp-controller="Bot" asp-action="StopBot" class="btn btn-outline-secondary status-action">Stop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="status status-negative">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-9">
+                    <i class="fas fa-pause status-icon"></i>
+                    <span>Bot is not running.</span>
+                </div>
+                <div class="col-3">
+                    <a asp-controller="Bot" asp-action="StartBot" class="btn btn-outline-success status-action">Start</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

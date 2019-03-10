@@ -3,17 +3,13 @@
     ViewData["Title"] = "Bot Dashboard";
 }
 
-<h1>Hello, World!</h1>
-
-<partial name="_ActiveBotWidget.cshtml" for="ActiveAccount" />
-
-@if (Model.BotIsRunning)
-{
-    <p>Bot is running...</p>
-    <a asp-controller="Bot" asp-action="StopBot">Stop</a>
-}
-else
-{
-    <p>Bot is not running.</p>
-    <a asp-controller="Bot" asp-action="StartBot">Start</a>
-}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <partial name="_BotStatusWidget.cshtml" for="BotIsRunning"/>
+        </div>
+        <div class="col-8">
+            <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount"/>
+        </div>
+    </div>
+</div>
