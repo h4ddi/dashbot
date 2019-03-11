@@ -2,13 +2,34 @@
 
 @if (Model is null)
 {
-    <p>No bot account has been selected.</p>
-    <p>You can authenticate a bot <a asp-action="Authentication" asp-controller="Bot">here</a>.</p>
+    <div class="widget-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 text-center">
+                    <i class="fas fa-ghost animated-ghost"></i>
+                </div>
+                <div class="col-8">
+                    <span>No bot account selected.</span>
+                    <p class="mt-2 text-secondary">You can authenticate a bot <a asp-action="Authentication" asp-controller="Bot">here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 }
 else
 {
-    <h4>Bot Account</h4>
-    <hr />
-    <img src="@Model.AvatarUrl"/>
-    <p>@Model.Name</p>
+    <div class="widget-body">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-3">
+                    <img src="@Model.AvatarUrl" class="img-fluid" />
+                </div>
+                <div class="col-9">
+                    <span>@Model.Name</span>
+                    <br/>
+                    <a asp-controller="Bot" asp-action="Authentication">Use a different bot account.</a>
+                </div>
+            </div>
+        </div>
+    </div>
 }

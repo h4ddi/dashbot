@@ -72,7 +72,7 @@ body {
 
 /* Bot status
 -------------------------------------------------- */
-.status {
+.widget-body {
   background-color: #222;
   padding: 15px;
   box-shadow: 1px 1px 3px 0 black;
@@ -92,4 +92,24 @@ body {
 
 .status-action {
   float: right;
+}
+
+/* Animated Ghost
+-------------------------------------------------- */
+.animated-ghost {
+  font-size: 4em;
+  color: rgba(255, 255, 255, 0.5);
+  top: 4px;
+  animation-name: ghost-bob;
+  animation-delay: 0;
+  animation-iteration-count: infinite;
+  animation-direction: forward;
+  animation-duration: 3s;
+  position: relative;
+}
+
+@keyframes ghost-bob {
+  60% {
+    top: -5px;
+  }
 }

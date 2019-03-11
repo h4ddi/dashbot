@@ -25,7 +25,8 @@ namespace Server.Controllers
             var accounts = _botCredentials.GetAllAccounts();
             var model = new BotAuthViewModel
             {
-                SavedBotAccounts = accounts.Select(Mapper.Map<BotAccountViewModel>)
+                SavedBotAccounts = accounts.Select(Mapper.Map<BotAccountViewModel>),
+                BotIsRunning = _bot.IsRunning()
             };
 
             return View(model);

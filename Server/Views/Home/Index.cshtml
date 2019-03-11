@@ -5,14 +5,14 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-4">
+        <div class="col-5">
             @if (Model.ActiveAccount != null)
             {
                 <partial name="_BotStatusWidget.cshtml" for="BotIsRunning"/>
             }
-        </div>
-        <div class="col-8">
             <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount"/>
+        </div>
+        <div class="col-7">
         </div>
     </div>
 </div>

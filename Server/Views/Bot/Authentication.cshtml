@@ -1,24 +1,36 @@
 @model BotAuthViewModel
 
-@if (!Model.SavedBotAccounts.Any())
+@if (Model.BotIsRunning)
 {
-    <p>There are no stored accounts.</p>
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">No can do!</h4>
+        <p>You cannot change the bot account while the bot is running.</p>
+        <hr>
+        <p class="mb-0"><a asp-controller="Home" asp-action="Index">Go back</a></p>
+    </div>
 }
 else
 {
-    foreach (var account in Model.SavedBotAccounts)
+    @if (!Model.SavedBotAccounts.Any())
     {
-        <a asp-controller="Bot" asp-action="UseStoredAccount" asp-route-name="@account.Name">
-            <div>
-                <img src="@account.AvatarUrl" width="100" height="100" />
-                <p>@account.Name</p>
-            </div>
-        </a>
+        <p>There are no stored accounts.</p>
     }
-}
+    else
+    {
+        foreach (var account in Model.SavedBotAccounts)
+        {
+            <a asp-controller="Bot" asp-action="UseStoredAccount" asp-route-name="@account.Name">
+                <div>
+                    <img src="@account.AvatarUrl" width="100" height="100" />
+                    <p>@account.Name</p>
+                </div>
+            </a>
+        }
+    }
 
-<ul>
-    <li>
-        <a asp-controller="Bot" asp-action="OneTimeToken">Use a one-time token.</a>
-    </li>
-</ul>
+    <ul>
+        <li>
+            <a asp-controller="Bot" asp-action="OneTimeToken">Use a one-time token.</a>
+        </li>
+    </ul>
+}
