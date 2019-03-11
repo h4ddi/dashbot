@@ -6,10 +6,70 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <partial name="_BotStatusWidget.cshtml" for="BotIsRunning"/>
+            @if (Model.ActiveAccount != null)
+            {
+                <partial name="_BotStatusWidget.cshtml" for="BotIsRunning"/>
+            }
         </div>
         <div class="col-8">
             <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount"/>
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script src="~/lib/@Html.Raw("@")aspnet/signalr/dist/browser/signalr.js"></script>
+    <script>
+        var connection = new signalR.HubConnectionBuilder().withUrl("/botHub").build();
+
+        var $statusActionBtn = $("#StatusActionButton");
+        var $statusMessage = $("#StatusMessage");
+        var $statusIcon = $("#StatusIcon");
+        var $statusWidget = $("#StatusWidget");
+        
+        connection.on("BotConnectedChanged", function (isConnected) {
+            console.log("Got update form signalR - Connected: " + isConnected);
+            setBotConnected(isConnected);
+        });
+        
+        connection.start().then(function(){
+            // on connection started
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        $statusActionBtn.click(() => {
+            $statusActionBtn.attr("disabled", "disabled");
+            $statusMessage.text("Changing status...");
+
+            connection.invoke("ToggleBotConnection").catch((err) => {
+                return console.error(err.toString());
+            });
+        });
+
+        function setBotConnected(isConnected) {
+            $statusActionBtn.removeAttr("disabled");
+
+            if (isConnected) {
+                $statusActionBtn.text("Stop");
+                $statusActionBtn.removeClass("btn-outline-success");
+                $statusActionBtn.addClass("btn-outline-secondary");
+                $statusMessage.text("Bot is running...");
+                $statusIcon.removeClass("fa-pause");
+                $statusIcon.addClass("fa-play");
+                $statusWidget.removeClass("status-negative");
+                $statusWidget.addClass("status-positive");
+            } else {
+                $statusActionBtn.text("Start");
+                $statusActionBtn.removeClass("btn-outline-secondary");
+                $statusActionBtn.addClass("btn-outline-success");
+                $statusIcon.removeClass("fa-play");
+                $statusIcon.addClass("fa-pause");
+                $statusMessage.text("Bot is not running.");
+                $statusWidget.removeClass("status-positive");
+                $statusWidget.addClass("status-negative");
+            }
+        }
+    </script>
+}

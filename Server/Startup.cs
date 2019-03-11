@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using DashBot.Entities;
+using Server.Hubs;
 using Server.Models;
 
 namespace Server
@@ -38,6 +39,8 @@ namespace Server
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +60,10 @@ namespace Server
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<BotHub>("/botHub");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

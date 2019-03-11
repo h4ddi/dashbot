@@ -1,9 +1,12 @@
-﻿using DashBot.Abstractions;
+﻿using System;
+using DashBot.Abstractions;
 using DashBot.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using System.Linq;
 using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
+using Server.Hubs;
 
 namespace Server.Controllers
 {
@@ -11,11 +14,21 @@ namespace Server.Controllers
     {
         private readonly ICredentials _botCredentials;
         private readonly IDiscordBot _bot;
+        private readonly IHubContext<BotHub> _botHubContext;
 
-        public BotController(ICredentials botCredentials, IDiscordBot bot)
+        public BotController(ICredentials botCredentials, IDiscordBot bot, IHubContext<BotHub> botHubContext)
         {
             _botCredentials = botCredentials;
             _bot = bot;
+            _botHubContext = botHubContext;
+
+            _bot.OnConnectedChanged += BotOnOnConnectedChanged;
+        }
+
+        private async void BotOnOnConnectedChanged(object sender, EventArgs e)
+        {
+            if (!(e is ConnectionEventArgs args)) { return; }
+            await _botHubContext.Clients.All.SendCoreAsync("BotConnectedChanged", new object[] { args.IsConnected });
         }
 
         public IActionResult Authentication()
