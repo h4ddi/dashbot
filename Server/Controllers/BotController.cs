@@ -46,7 +46,7 @@ namespace Server.Controllers
                 return View(oneTimeBot);
             }
 
-            _bot.Account = new BotAccount(oneTimeBot.Token);
+            _bot.SetActiveBotAccount(new BotAccount(oneTimeBot.Token));
 
             return RedirectToAction("Index", "Home");
         }
@@ -77,7 +77,7 @@ namespace Server.Controllers
         {
             var account = _botCredentials.GetAccountByName(name);
             if (account is null) { return BadRequest($"No account with the name {name} exists."); }
-            _bot.Account = account;
+            _bot.SetActiveBotAccount(account);
             return RedirectToAction("Index", "Home");
         }
     }

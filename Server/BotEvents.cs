@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using DashBot.Abstractions;
 using DashBot.Entities;
 using Microsoft.AspNetCore.SignalR;
@@ -17,13 +16,20 @@ namespace Server
             _bot = bot;
             _botHubContext = botHubContext;
 
-            _bot.OnConnectedChanged += BotOnOnConnectedChanged;
+            _bot.OnConnectedChanged += BotOnConnectedChanged;
+            _bot.OnBotAccountChanged += OnBotAccountChanged;
         }
 
-        private async void BotOnOnConnectedChanged(object sender, EventArgs e)
+        private async void BotOnConnectedChanged(object sender, EventArgs e)
         {
             if (!(e is ConnectionEventArgs args)) { return; }
             await _botHubContext.Clients.All.SendCoreAsync("BotConnectedChanged", new object[] { args.IsConnected });
+        }
+
+        private async void OnBotAccountChanged(object sender, EventArgs e)
+        {
+            if (!(e is BotAccountEventArgs account)) { return; }
+            await _botHubContext.Clients.All.SendCoreAsync("BotAccountSelected", new object[] {account});
         }
     }
 }

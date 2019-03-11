@@ -1,8 +1,7 @@
-﻿using System.Diagnostics;
-using DashBot.Abstractions;
-using DashBot.Entities;
+﻿using DashBot.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
+using System.Diagnostics;
 
 namespace Server.Controllers
 {
@@ -22,12 +21,14 @@ namespace Server.Controllers
                 BotIsRunning = _bot.IsRunning()
             };
 
-            if (_bot.Account != null)
+            var botAccount = _bot.GetActiveBotAccount();
+
+            if (botAccount != null)
             {
                 model.ActiveAccount = new BotAccountViewModel
                 {
-                    AvatarUrl = _bot.Account.AvatarUrl,
-                    Name = _bot.Account.Name
+                    AvatarUrl = botAccount.AvatarUrl,
+                    Name = botAccount.Name
                 };
             }
 

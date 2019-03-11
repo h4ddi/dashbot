@@ -8,9 +8,9 @@
         <div class="col-5">
             @if (Model.ActiveAccount != null)
             {
-                <partial name="_BotStatusWidget.cshtml" for="BotIsRunning"/>
+                <partial name="_BotStatusWidget.cshtml" for="BotIsRunning" />
             }
-            <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount"/>
+            <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount" />
         </div>
         <div class="col-7">
         </div>
@@ -18,7 +18,9 @@
 </div>
 
 @section Scripts
-{
+    {
     <script src="~/lib/@Html.Raw("@")aspnet/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/botStatusWidget.js"></script>
+    <script src="~/js/signalRConnection.js"></script>
+    <script src="~/js/botStatusWidgetSignalR.js"></script>
+    <script src="~/js/activeBotWidgetSignalR.js"></script>
 }
