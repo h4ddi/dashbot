@@ -21,6 +21,7 @@ namespace Server
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<BotAccount, BotAccountViewModel>();
+                cfg.CreateMap<BotAccountModel, BotAccount>();
             });
         }
 

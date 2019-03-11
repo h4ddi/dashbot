@@ -7,6 +7,7 @@ namespace DashBot.Abstractions
     {
         IEnumerable<BotAccount> GetAllAccounts();
         BotAccount GetAccountByName(string name);
+        void StoreAccount(BotAccount account);
     }
 }
 

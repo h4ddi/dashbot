@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DashBot.Abstractions;
 using DashBot.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -79,6 +80,32 @@ namespace Server.Controllers
             if (account is null) { return BadRequest($"No account with the name {name} exists."); }
             _bot.SetActiveBotAccount(account);
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult NewBotAccount()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult NewBotAccount([FromForm] BotAccountModel account)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(account);
+            }
+
+            try
+            {
+                _botCredentials.StoreAccount(Mapper.Map<BotAccount>(account));
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("Name", "A bot with this name already exists.");
+                return View(account);
+            }
+
+            return RedirectToAction("Authentication");
         }
     }
 }
