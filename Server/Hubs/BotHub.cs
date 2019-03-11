@@ -13,7 +13,7 @@ namespace Server.Hubs
             _bot = bot;
         }
 
-        public async Task ToggleBotConnection()
+        public Task ToggleBotConnection()
         {
             if(_bot.IsRunning())
             {
@@ -23,6 +23,8 @@ namespace Server.Hubs
             {
                 _bot.Connect();
             }
+
+            return Task.CompletedTask;
         }
     }
 }
