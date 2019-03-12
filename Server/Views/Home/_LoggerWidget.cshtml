@@ -1,0 +1,18 @@
+﻿@model IEnumerable<string>
+
+<div class="widget-body">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <span class="logger-widget-title">Latest Logs</span>
+                <ul id="LoggerWidgetList">
+                    @foreach (var log in Model)
+                    {
+                        <li class="log-item"><i class="fas fa-angle-right"></i> @log</li>
+                    }
+                    </ul>
+                <a href="#">View full log</a>
+            </div>
+        </div>
+    </div>
+</div>

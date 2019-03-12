@@ -8,17 +8,20 @@ namespace Server.Controllers
     public class HomeController : Controller
     {
         private readonly IDiscordBot _bot;
+        private readonly ILogger _logger;
 
-        public HomeController(IDiscordBot bot)
+        public HomeController(IDiscordBot bot, ILogger logger)
         {
             _bot = bot;
+            _logger = logger;
         }
 
         public IActionResult Index()
         {
             var model = new OverviewViewModel
             {
-                BotIsRunning = _bot.IsRunning()
+                BotIsRunning = _bot.IsRunning(),
+                LogBuffer = _logger.GetLatest(10)
             };
 
             var botAccount = _bot.GetActiveBotAccount();

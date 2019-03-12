@@ -8,16 +8,21 @@ namespace Server
 {
     public class BotEvents
     {
-        private readonly IDiscordBot _bot;
         private readonly IHubContext<BotHub> _botHubContext;
 
-        public BotEvents(IDiscordBot bot, IHubContext<BotHub> botHubContext)
+        public BotEvents(ILogger logger, IDiscordBot bot, IHubContext<BotHub> botHubContext)
         {
-            _bot = bot;
             _botHubContext = botHubContext;
 
-            _bot.OnConnectedChanged += BotOnConnectedChanged;
-            _bot.OnBotAccountChanged += OnBotAccountChanged;
+            logger.OnLog += OnNewLog;
+            bot.OnConnectedChanged += BotOnConnectedChanged;
+            bot.OnBotAccountChanged += OnBotAccountChanged;
+        }
+
+        private async void OnNewLog(object sender, EventArgs e)
+        {
+            if (!(e is LogEventArgs args)) { return; }
+            await _botHubContext.Clients.All.SendCoreAsync("NewLogAdded", new object[] { args.NewMessage });
         }
 
         private async void BotOnConnectedChanged(object sender, EventArgs e)

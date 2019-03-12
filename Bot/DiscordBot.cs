@@ -15,15 +15,27 @@ namespace DashBot.Bot
         private BotAccount _account;
         private DiscordSocketClient _client;
 
-        public DiscordBot()
+        private readonly ILogger _logger;
+
+        public DiscordBot(ILogger logger)
         {
+            _logger = logger;
+
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Debug
+                LogLevel = LogSeverity.Debug,
+                AlwaysDownloadUsers = true
             });
 
             _client.Connected += ClientOnConnected;
             _client.Disconnected += ClientOnDisconnected;
+            _client.Log += ClientOnLog;
+        }
+
+        private Task ClientOnLog(LogMessage log)
+        {
+            _logger.Log($"[{log.Source}] - {log.Message}");
+            return Task.CompletedTask;
         }
 
         private Task ClientOnDisconnected(Exception e)

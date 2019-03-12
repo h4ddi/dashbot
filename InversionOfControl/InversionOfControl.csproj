@@ -9,6 +9,7 @@
     <ProjectReference Include="..\Abstractions\Abstractions.csproj" />
     <ProjectReference Include="..\Credentials\Credentials.csproj" />
     <ProjectReference Include="..\JsonStorage\JsonStorage.csproj" />
+    <ProjectReference Include="..\Logger\Logger.csproj" />
   </ItemGroup>
 
 </Project>

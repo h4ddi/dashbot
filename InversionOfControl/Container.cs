@@ -4,6 +4,7 @@ using DashBot.Abstractions;
 using DashBot.Credentials;
 using DashBot.JsonStorage;
 using DashBot.Bot;
+using Logger;
 
 namespace DashBot.InversionOfControl
 {
@@ -14,6 +15,7 @@ namespace DashBot.InversionOfControl
                 .AddSingleton<Random>()
                 .AddSingleton<IPersistentStorage, JsonPersistentStorage>()
                 .AddSingleton<ICredentials, CredentialsProvider>()
-                .AddSingleton<IDiscordBot, DiscordBot>();
+                .AddSingleton<IDiscordBot, DiscordBot>()
+                .AddSingleton<ILogger, InMemoryLogger>();
     }
 }

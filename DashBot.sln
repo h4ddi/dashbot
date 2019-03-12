@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot", "Bot\Bot.csproj", "{FA54BD3B-5DA1-49E4-8131-44E5610E8BDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot", "Bot\Bot.csproj", "{FA54BD3B-5DA1-49E4-8131-44E5610E8BDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{2BAFA878-2310-43E1-9DC7-8C332EF61036}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{2BAFA878-2310-43E1-9DC7-8C332EF61036}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstractions", "Abstractions\Abstractions.csproj", "{3D6DD198-43C3-4C47-B474-483978E40B76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abstractions", "Abstractions\Abstractions.csproj", "{3D6DD198-43C3-4C47-B474-483978E40B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assert", "Assert\Assert.csproj", "{E0B20CCB-C34B-4098-BBC7-A159C53248B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assert", "Assert\Assert.csproj", "{E0B20CCB-C34B-4098-BBC7-A159C53248B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonStorage", "JsonStorage\JsonStorage.csproj", "{059ADA49-D85E-43FC-8888-27F57A3D37BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStorage", "JsonStorage\JsonStorage.csproj", "{059ADA49-D85E-43FC-8888-27F57A3D37BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonStorage.Tests", "JsonStorage.Tests\JsonStorage.Tests.csproj", "{70BE5686-CA81-41E1-B115-44DD628CECF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonStorage.Tests", "JsonStorage.Tests\JsonStorage.Tests.csproj", "{70BE5686-CA81-41E1-B115-44DD628CECF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{FB298E79-C8A1-400A-A602-711B442FC542}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{FB298E79-C8A1-400A-A602-711B442FC542}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Credentials", "Credentials\Credentials.csproj", "{0DB921CE-B276-4905-A3EE-C98C6D8E6BCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Credentials", "Credentials\Credentials.csproj", "{0DB921CE-B276-4905-A3EE-C98C6D8E6BCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InversionOfControl", "InversionOfControl\InversionOfControl.csproj", "{8264B889-3489-4A9E-90EB-D9B06663FD17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InversionOfControl", "InversionOfControl\InversionOfControl.csproj", "{8264B889-3489-4A9E-90EB-D9B06663FD17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{45057A2F-E958-4EA4-8F5F-7D983ECE2468}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +31,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{FA54BD3B-5DA1-49E4-8131-44E5610E8BDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -142,5 +141,23 @@ Global
 		{8264B889-3489-4A9E-90EB-D9B06663FD17}.Release|x64.Build.0 = Release|Any CPU
 		{8264B889-3489-4A9E-90EB-D9B06663FD17}.Release|x86.ActiveCfg = Release|Any CPU
 		{8264B889-3489-4A9E-90EB-D9B06663FD17}.Release|x86.Build.0 = Release|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Debug|x64.Build.0 = Debug|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Debug|x86.Build.0 = Debug|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Release|x64.ActiveCfg = Release|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Release|x64.Build.0 = Release|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Release|x86.ActiveCfg = Release|Any CPU
+		{45057A2F-E958-4EA4-8F5F-7D983ECE2468}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EFD101A-3EE3-414D-8178-E579D261A7A4}
 	EndGlobalSection
 EndGlobal

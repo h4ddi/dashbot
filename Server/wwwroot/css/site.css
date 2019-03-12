@@ -140,3 +140,16 @@ body {
   width: 100%;
   text-align: center;
 }
+
+/* Logger widget
+-------------------------------------------------- */
+.log-item {
+  padding: 5px;
+  list-style: none;
+  border-bottom: 1px solid #444;
+}
+
+.logger-widget-title {
+  color: #aaa;
+}
+
