@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DashBot.Abstractions;
 using DashBot.Entities;
@@ -74,6 +76,22 @@ namespace DashBot.Bot
             var e = new ConnectionEventArgs { IsConnected = isConnected };
             OnConnectedChanged?.Invoke(this, e);
         }
+
+        public IEnumerable<ServerDetail> GetAvailableServers()
+            =>_client.Guilds.Select(guild => new ServerDetail
+            {
+                Name = guild.Name,
+                AvatarUrl = guild.IconUrl,
+                Id = guild.Id,
+                TextChannels = guild.TextChannels.Select(ToTextChannel)
+            });
+        
+        private static TextChannel ToTextChannel(SocketTextChannel tc)
+            => new TextChannel
+            {
+                Name = tc.Name,
+                Id = tc.Id
+            };
 
         public BotAccount GetActiveBotAccount() => _account;
 

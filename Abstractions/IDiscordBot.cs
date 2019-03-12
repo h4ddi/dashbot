@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DashBot.Entities;
 
 namespace DashBot.Abstractions
@@ -8,6 +9,7 @@ namespace DashBot.Abstractions
         event EventHandler OnConnectedChanged;
         event EventHandler OnBotAccountChanged;
         event EventHandler OnBotReceivedMessage;
+        IEnumerable<ServerDetail> GetAvailableServers();
         BotAccount GetActiveBotAccount();
         void SetActiveBotAccount(BotAccount account);
         bool IsRunning();
