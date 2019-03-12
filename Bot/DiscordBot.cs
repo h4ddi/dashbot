@@ -11,6 +11,7 @@ namespace DashBot.Bot
     {
         public event EventHandler OnConnectedChanged;
         public event EventHandler OnBotAccountChanged;
+        public event EventHandler OnBotReceivedMessage;
 
         private BotAccount _account;
         private DiscordSocketClient _client;
@@ -30,6 +31,24 @@ namespace DashBot.Bot
             _client.Connected += ClientOnConnected;
             _client.Disconnected += ClientOnDisconnected;
             _client.Log += ClientOnLog;
+            _client.MessageReceived += ClientOnMessageReceived;
+        }
+
+        private Task ClientOnMessageReceived(SocketMessage msg)
+        {
+            var args = new ReceivedMessageEventArgs
+            {
+                Message = msg.Content,
+                SenderUsername = msg.Author.Username,
+                ChannelName = msg.Channel.Name,
+                SenderAvatarUrl = msg.Author.GetAvatarUrl(),
+                SenderId = msg.Author.Id,
+                ChannelId = msg.Channel.Id,
+                SenderReputation = 0 // TODO: Pull when reputation is implemented
+            };
+
+            OnBotReceivedMessage?.Invoke(this, args);
+            return Task.CompletedTask;
         }
 
         private Task ClientOnLog(LogMessage log)

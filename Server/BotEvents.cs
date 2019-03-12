@@ -17,6 +17,14 @@ namespace Server
             logger.OnLog += OnNewLog;
             bot.OnConnectedChanged += BotOnConnectedChanged;
             bot.OnBotAccountChanged += OnBotAccountChanged;
+            bot.OnBotReceivedMessage += OnBotReceivedMessage;
+        }
+
+        private async void OnBotReceivedMessage(object sender, EventArgs e)
+        {
+            if (!(e is ReceivedMessageEventArgs args)) { return; }
+            await _botHubContext.Clients.All.SendCoreAsync($"Chat{args.ChannelId}", new object[] { args });
+            await _botHubContext.Clients.All.SendCoreAsync("ChatGlobal", new object[] { args });
         }
 
         private async void OnNewLog(object sender, EventArgs e)

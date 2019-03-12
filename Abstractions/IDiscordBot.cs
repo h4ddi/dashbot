@@ -7,6 +7,7 @@ namespace DashBot.Abstractions
     {
         event EventHandler OnConnectedChanged;
         event EventHandler OnBotAccountChanged;
+        event EventHandler OnBotReceivedMessage;
         BotAccount GetActiveBotAccount();
         void SetActiveBotAccount(BotAccount account);
         bool IsRunning();
