@@ -13,12 +13,14 @@ namespace Server.Controllers
         private readonly ICredentials _botCredentials;
         private readonly IDiscordBot _bot;
         private readonly BotEvents _botEvents;
+        private readonly ILogger _logger;
 
-        public BotController(ICredentials botCredentials, IDiscordBot bot, BotEvents botEvents)
+        public BotController(ICredentials botCredentials, IDiscordBot bot, BotEvents botEvents, ILogger logger)
         {
             _botCredentials = botCredentials;
             _bot = bot;
             _botEvents = botEvents;
+            _logger = logger;
         }
 
         public IActionResult Authentication()
@@ -106,6 +108,12 @@ namespace Server.Controllers
             }
 
             return RedirectToAction("Authentication");
+        }
+
+        public IActionResult Log()
+        {
+            var model = _logger.GetAll();
+            return View(model);
         }
     }
 }

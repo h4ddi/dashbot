@@ -1,0 +1,21 @@
+﻿@model System.Collections.Generic.IEnumerable<string>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <ul id="LoggerWidgetList">
+                @foreach (var message in Model)
+                {
+                    <li class="log-item"><i class="fas fa-angle-right"></i> @message</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/lib/@Html.Raw("@")aspnet/signalr/dist/browser/signalr.js"></script>
+    <script src="../js/signalRConnection.js"></script>
+    <script src="../js/loggerSignalRNoLimit.js"></script>
+}
