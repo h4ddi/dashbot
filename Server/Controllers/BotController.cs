@@ -112,7 +112,7 @@ namespace Server.Controllers
 
         public IActionResult Log()
         {
-            var model = _logger.GetAll();
+            var model = _logger.GetAll().Reverse();
             return View(model);
         }
     }

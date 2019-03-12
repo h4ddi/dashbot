@@ -19,8 +19,9 @@ namespace Logger
 
         public void Log(string message)
         {
-            Logs.Add(message);
-            OnLog?.Invoke(this, new LogEventArgs { NewMessage = message });
+            var entry = $"{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()} : {message}";
+            Logs.Add(entry);
+            OnLog?.Invoke(this, new LogEventArgs { NewMessage = entry });
         }
 
         public IEnumerable<string> GetAll()

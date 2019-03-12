@@ -153,3 +153,9 @@ body {
   color: #aaa;
 }
 
+/* Logger Page
+-------------------------------------------------- */
+.log-scrollable {
+  height: 800px;
+  overflow-y: scroll;
+}

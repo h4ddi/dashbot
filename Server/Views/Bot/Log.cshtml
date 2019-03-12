@@ -2,7 +2,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 log-scrollable">
+            <span>Full log (newest first)</span>
             <ul id="LoggerWidgetList">
                 @foreach (var message in Model)
                 {
@@ -16,6 +17,6 @@
 @section Scripts
 {
     <script src="~/lib/@Html.Raw("@")aspnet/signalr/dist/browser/signalr.js"></script>
-    <script src="../js/signalRConnection.js"></script>
-    <script src="../js/loggerSignalRNoLimit.js"></script>
+    <script src="~/js/signalRConnection.js"></script>
+    <script src="~/js/fullLoggerSignalR.js"></script>
 }
