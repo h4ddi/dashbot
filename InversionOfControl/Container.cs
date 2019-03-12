@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using DashBot.Abstractions;
-using DashBot.Credentials;
+using DashBot.Bot.Credentials;
 using DashBot.JsonStorage;
 using DashBot.Bot;
 using Logger;
