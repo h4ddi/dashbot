@@ -20,6 +20,8 @@ namespace Server.Controllers
 
         public IActionResult Global()
         {
+            if (!_bot.IsRunning()) { return RedirectToAction("Authentication", "Bot"); }
+
             var model = new ChatViewModel
             {
                 AvailableServers = _bot.GetAvailableServers().Select(Mapper.Map<ServerDetailViewModel>),
@@ -32,6 +34,8 @@ namespace Server.Controllers
         [HttpGet("[controller]/[action]/{serverId}/{channelId}")]
         public async Task<IActionResult> Channel(ulong serverId, ulong channelId)
         {
+            if (!_bot.IsRunning()) { return RedirectToAction("Authentication", "Bot"); }
+
             var model = new ChatViewModel
             {
                 ActiveServer = Mapper.Map<ServerDetailViewModel>(_bot.GetServerDetailFromId(serverId)),

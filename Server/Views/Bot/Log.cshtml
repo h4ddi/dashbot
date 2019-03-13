@@ -1,4 +1,7 @@
 ﻿@model System.Collections.Generic.IEnumerable<string>
+@{
+    ViewData["Title"] = "Log";
+}
 
 <div class="container-fluid">
     <div class="row">
@@ -15,7 +18,7 @@
 </div>
 
 @section Scripts
-{
+    {
     <script src="~/lib/@Html.Raw("@")aspnet/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/signalRConnection.js"></script>
     <script src="~/js/fullLoggerSignalR.js"></script>

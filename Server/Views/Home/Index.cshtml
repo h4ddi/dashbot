@@ -1,19 +1,22 @@
 ﻿@model OverviewViewModel
 @{
-    ViewData["Title"] = "Bot Dashboard";
+    ViewData["Title"] = "Dashboard";
 }
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-5">
+        <div class="col-sm-12 col-md-6 col-lg-5">
             @if (Model.ActiveAccount != null)
             {
                 <partial name="_BotStatusWidget.cshtml" for="BotIsRunning" />
             }
             <partial name="_ActiveBotWidget.cshtml" for="ActiveAccount" />
         </div>
-        <div class="col-7">
-            <partial name="_LoggerWidget.cshtml" for="LogBuffer" />
+        <div class="col-sm-12 col-md-6 col-lg-7">
+            @if (Model.ActiveAccount != null)
+            {
+                <partial name="_LoggerWidget.cshtml" for="LogBuffer" />
+            }
         </div>
     </div>
 </div>
