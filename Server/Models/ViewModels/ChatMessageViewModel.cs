@@ -1,4 +1,6 @@
-﻿namespace Server.Models
+﻿using System.Collections.Generic;
+
+namespace Server.Models
 {
     public class ChatMessageViewModel
     {
@@ -8,5 +10,6 @@
         public int SenderReputation { get; set; }
         public string Message { get; set; }
         public string ChannelName { get; set; }
+        public IEnumerable<string> FileLinks { get; set; }
     }
 }

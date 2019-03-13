@@ -69,6 +69,7 @@ namespace Server
             app.UseSignalR(routes =>
             {
                 routes.MapHub<BotHub>("/botHub");
+                routes.MapHub<ChatHub>("/chatHub");
             });
             app.UseMvc(routes =>
             {

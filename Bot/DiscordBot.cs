@@ -26,7 +26,7 @@ namespace DashBot.Bot
 
             _client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Debug,
+                LogLevel = LogSeverity.Info,
                 AlwaysDownloadUsers = true
             });
 
@@ -145,7 +145,7 @@ namespace DashBot.Bot
             var guild = _client.GetGuild(serverId);
             var channel = guild.GetTextChannel(channelId);
 
-            var messages = await channel.GetMessagesAsync(5).FlattenAsync();
+            var messages = await channel.GetMessagesAsync(10).FlattenAsync();
 
             return messages.Select(m => new ChatMessage
             {
@@ -155,8 +155,16 @@ namespace DashBot.Bot
                 SenderUsername = m.Author.Username,
                 SenderAvatarUrl = m.Author.GetAvatarUrl(),
                 SenderReputation = 0, // TODO: Get when implemented
-                Message = m.Content
-            });
+                Message = m.Content,
+                FileLinks = m.Attachments.Select(a => a.Url)
+            }).Reverse();
+        }
+
+        public async Task SayInChannel(ulong serverId, ulong channelId, string message)
+        {
+            var guild = _client.GetGuild(serverId);
+            var channel = guild.GetTextChannel(channelId);
+            await channel.SendMessageAsync(message);
         }
 
         private void BotAccountChanged()

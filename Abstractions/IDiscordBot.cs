@@ -19,5 +19,6 @@ namespace DashBot.Abstractions
         ServerDetail GetServerDetailFromId(ulong serverId);
         TextChannel GetTextChannelDetailFromId(ulong serverId, ulong channelId);
         Task<IEnumerable<ChatMessage>> GetMessageBufferFor(ulong serverId, ulong channelId);
+        Task SayInChannel(ulong serverId, ulong channelId, string message);
     }
 }

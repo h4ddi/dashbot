@@ -1,4 +1,6 @@
-﻿namespace DashBot.Entities
+﻿using System.Collections.Generic;
+
+namespace DashBot.Entities
 {
     public class ChatMessage
     {
@@ -9,5 +11,6 @@
         public string Message { get; set; }
         public string ChannelName { get; set; }
         public ulong ChannelId { get; set; }
+        public IEnumerable<string> FileLinks { get; set; }
     }
 }

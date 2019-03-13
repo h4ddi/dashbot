@@ -9,10 +9,12 @@ namespace Server
     public class BotEvents
     {
         private readonly IHubContext<BotHub> _botHubContext;
+        private readonly IHubContext<ChatHub> _chatHubContext;
 
-        public BotEvents(ILogger logger, IDiscordBot bot, IHubContext<BotHub> botHubContext)
+        public BotEvents(ILogger logger, IDiscordBot bot, IHubContext<BotHub> botHubContext, IHubContext<ChatHub> chatHubContext)
         {
             _botHubContext = botHubContext;
+            _chatHubContext = chatHubContext;
 
             logger.OnLog += OnNewLog;
             bot.OnConnectedChanged += BotOnConnectedChanged;
@@ -23,8 +25,8 @@ namespace Server
         private async void OnBotReceivedMessage(object sender, EventArgs e)
         {
             if (!(e is ReceivedMessageEventArgs args)) { return; }
-            await _botHubContext.Clients.All.SendCoreAsync($"Chat{args.ChannelId}", new object[] { args });
-            await _botHubContext.Clients.All.SendCoreAsync("ChatGlobal", new object[] { args });
+            await _chatHubContext.Clients.All.SendCoreAsync($"Chat-{args.ChannelId}", new object[] { args });
+            await _chatHubContext.Clients.All.SendCoreAsync("ChatGlobal", new object[] { args });
         }
 
         private async void OnNewLog(object sender, EventArgs e)
