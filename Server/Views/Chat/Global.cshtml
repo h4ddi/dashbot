@@ -2,41 +2,48 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12">
-            <ul>
+        <div class="col-4">
+            <ul class="server-list">
                 @foreach (var server in Model.AvailableServers)
                 {
-                <li>
-                    <img src="@server.AvatarUrl" width="50" height="50" />
-                    <p>@server.Name</p>
-                    <ul>
-                        @foreach (var channel in server.TextChannels)
+                    <li class="server-item widget-body d-flex align-content-center align-items-center">
+                        <img class="server-icon" src="@server.AvatarUrl"/>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@server.Name</a>
+                        <div class="dropdown-menu">
+                            @foreach (var channel in server.TextChannels)
                             {
-                        <li><p>TODO: link - NAME: @channel.Name ID: @channel.Id</p></li>
+                                <a class="dropdown-item" asp-controller="Chat" asp-action="Channel" asp-route-serverId="@server.Id" asp-route-channelId="@channel.Id">@channel.Name</a>
                             }
-                    </ul>
-                </li>
+                        </div>
+                    </li>
                 }
             </ul>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
+        <div class="col-8">
             <ul id="GlobalChatList">
                 @foreach (var msg in Model.MessageBuffer)
                 {
-                <li>@msg.SenderUsername in @msg.ChannelName : @msg.Message</li>
+                    <li>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-3 d-flex align-content-center align-items-center">
+                                    <img class="msg-avatar" src="@msg.SenderAvatarUrl" />
+                                </div>
+                                <div class="col-9">
+                                    <span class="msg-username">@msg.SenderUsername</span>
+                                    <span class="msg-addon">@msg.SenderReputation</span>
+                                    <span class="msg-addon">@msg.ChannelName</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="msg-message">@msg.Message</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 }
             </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="form-group">
-                <label for="ChatInputArea">Your message:</label>
-                <textarea class="form-control" id="ChatInputArea" rows="2" disabled>You cannot chat globally.</textarea>
-            </div>
-            <button class="btn btn-primary" disabled>Send</button>
         </div>
     </div>
 </div>
