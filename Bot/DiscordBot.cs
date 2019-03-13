@@ -117,6 +117,48 @@ namespace DashBot.Bot
         public async void Stop()
             => await _client.StopAsync();
 
+        public ServerDetail GetServerDetailFromId(ulong serverId)
+        {
+            var server = _client.GetGuild(serverId);
+            if (server is null) { return null; }
+            return new ServerDetail
+            {
+                AvatarUrl = server.IconUrl,
+                Name = server.Name,
+                Id = server.Id,
+                TextChannels = server.TextChannels.Select(ToTextChannel)
+            };
+        }
+
+        public TextChannel GetTextChannelDetailFromId(ulong serverId, ulong channelId)
+        {
+            var channel = _client.GetGuild(serverId).GetTextChannel(channelId);
+            return new TextChannel
+            {
+                Name = channel.Name,
+                Id = channel.Id
+            };
+        }
+
+        public async Task<IEnumerable<ChatMessage>> GetMessageBufferFor(ulong serverId, ulong channelId)
+        {
+            var guild = _client.GetGuild(serverId);
+            var channel = guild.GetTextChannel(channelId);
+
+            var messages = await channel.GetMessagesAsync(5).FlattenAsync();
+
+            return messages.Select(m => new ChatMessage
+            {
+                ChannelId = channel.Id,
+                ChannelName = channel.Name,
+                SenderId = m.Author.Id,
+                SenderUsername = m.Author.Username,
+                SenderAvatarUrl = m.Author.GetAvatarUrl(),
+                SenderReputation = 0, // TODO: Get when implemented
+                Message = m.Content
+            });
+        }
+
         private void BotAccountChanged()
         {
             OnBotAccountChanged?.Invoke(this, new BotAccountEventArgs

@@ -21,28 +21,6 @@
         </div>
         <div class="col-8">
             <ul id="GlobalChatList">
-                @foreach (var msg in Model.MessageBuffer)
-                {
-                    <li>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-3 d-flex align-content-center align-items-center">
-                                    <img class="msg-avatar" src="@msg.SenderAvatarUrl" />
-                                </div>
-                                <div class="col-9">
-                                    <span class="msg-username">@msg.SenderUsername</span>
-                                    <span class="msg-addon">@msg.SenderReputation</span>
-                                    <span class="msg-addon">@msg.ChannelName</span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <span class="msg-message">@msg.Message</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                }
             </ul>
         </div>
     </div>

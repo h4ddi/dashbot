@@ -1,0 +1,52 @@
+﻿@model ChatViewModel
+@{
+    ViewData["Title"] = Model.ActiveChannel.Name;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <ul class="server-list">
+                @foreach (var server in Model.AvailableServers)
+                {
+                    <li class="server-item widget-body d-flex align-content-center align-items-center">
+                        <img class="server-icon" src="@server.AvatarUrl"/>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">@server.Name</a>
+                        <div class="dropdown-menu">
+                            @foreach (var channel in server.TextChannels)
+                            {
+                                <a class="dropdown-item" asp-controller="Chat" asp-action="Channel" asp-route-serverId="@server.Id" asp-route-channelId="@channel.Id">@channel.Name</a>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-8">
+            <ul id="LocalChatList">
+                @foreach (var message in Model.MessageBuffer)
+                {
+                    <li>
+                        <div class="container-fluid">
+                            <div class="row d-flex align-content-center align-items-center">
+                                <div class="col-1 p-0">
+                                    <img class="msg-avatar" src="@message.SenderAvatarUrl"/>
+                                </div>
+                                <div class="col-11 p-0">
+                                    <span class="msg-username text-lime">@message.SenderUsername</span>
+                                    <span class="msg-addon">@message.SenderReputation rep</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-1 p-0"></div>
+                                <div class="col-12">
+                                    <span class="msg-message">@message.Message</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

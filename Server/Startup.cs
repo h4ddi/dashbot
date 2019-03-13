@@ -24,6 +24,7 @@ namespace Server
                 cfg.CreateMap<BotAccountModel, BotAccount>();
                 cfg.CreateMap<TextChannel, TextChannelViewModel>();
                 cfg.CreateMap<ServerDetail, ServerDetailViewModel>();
+                cfg.CreateMap<ChatMessage, ChatMessageViewModel>();
             });
         }
 
