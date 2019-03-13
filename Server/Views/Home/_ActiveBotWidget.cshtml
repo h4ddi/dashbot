@@ -4,11 +4,11 @@
 {
     <div class="widget-body">
         <div class="container-fluid">
-            <div class="row">
+            <div class="row no-gutters">
                 <div class="col-3 text-center">
                     <i class="fas fa-ghost animated-ghost"></i>
                 </div>
-                <div class="col-8">
+                <div class="col">
                     <span>No bot account selected</span>
                     <p class="mt-2 text-secondary text-small">You can authenticate a bot <a asp-action="Authentication" asp-controller="Bot">here</a>.</p>
                 </div>
@@ -20,11 +20,11 @@ else
 {
     <div class="widget-body">
         <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-3 p-0">
+            <div class="row align-items-center no-gutters">
+                <div class="col-3">
                     <img id="ActiveAccountAvatar" src="@Model.AvatarUrl" class="img-fluid" />
                 </div>
-                <div class="col-9">
+                <div class="col pl-3">
                     <span id="ActiveAccountLabel">@Model.Name</span>
                     <br/>
                     <a asp-controller="Bot" asp-action="Authentication" class="text-small">Use a different bot account.</a>

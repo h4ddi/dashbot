@@ -33,10 +33,10 @@
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-tachometer-alt mr-1"></i> Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-cogs mr-1"></i> Settings</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Chat" asp-action="Global"><i class="fas fa-comment"></i> Chat</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Chat" asp-action="Global"><i class="fas fa-keyboard"></i> Impersonate bot</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="fas fa-cogs mr-1"></i> Settings</a>
                         </li>
                     </ul>
                 </div>
@@ -44,7 +44,6 @@
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -68,7 +67,6 @@
                 integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
         </script>
     </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     
     @RenderSection("Scripts", required: false)
 </body>
